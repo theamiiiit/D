@@ -1,51 +1,822 @@
+/* ==========================================
+   PREMIUM GIRLFRIEND'S DAY WEBSITE
+   Part 1
+========================================== */
 
-const text=`Happy Girlfriend's Day ❤️
+// -------------------------
+// DOM Elements
+// -------------------------
 
-Thank you for being the most beautiful part of my life.
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
 
-Your smile makes my darkest days brighter.
-Your hugs feel like home.
-Every memory with you is my favorite memory.
+const openBtn = document.getElementById("open");
 
-No matter what life brings,
-I promise to always stand beside you.
+const envelope = document.querySelector(".envelope");
 
-I love you more than words can ever say.
+const typing = document.getElementById("typing");
 
-Happy Girlfriend's Day, My Love ❤️`;
+const heartContainer = document.getElementById("heart-container");
 
-const btn=document.getElementById("openBtn");
-const letter=document.getElementById("letter");
-const msg=document.getElementById("msg");
-btn.onclick=()=>{
-btn.style.display="none";
-letter.classList.remove("hidden");
-let i=0;
-(function type(){
- if(i<text.length){
-   msg.textContent+=text[i++];
-   setTimeout(type,35);
- }
-})();
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+// -------------------------
+// Resize Canvas
+// -------------------------
+
+function resizeCanvas(){
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
+
+// =========================================
+// STARS
+// =========================================
+
+let stars = [];
+
+for(let i=0;i<220;i++){
+
+    stars.push({
+
+        x:Math.random()*canvas.width,
+
+        y:Math.random()*canvas.height,
+
+        r:Math.random()*2,
+
+        alpha:Math.random(),
+
+        speed:.1+Math.random()*.4
+
+    });
+
+}
+
+// =========================================
+// DRAW STARS
+// =========================================
+
+function drawStars(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    stars.forEach(star=>{
+
+        ctx.beginPath();
+
+        ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+
+        ctx.fillStyle="rgba(255,255,255,"+star.alpha+")";
+
+        ctx.fill();
+
+        star.alpha += (Math.random()-.5)*0.02;
+
+        if(star.alpha<0.2) star.alpha=.2;
+
+        if(star.alpha>1) star.alpha=1;
+
+    });
+
+    requestAnimationFrame(drawStars);
+
+}
+
+drawStars();
+
+// =========================================
+// FLOATING HEARTS
+// =========================================
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.fontSize=(15+Math.random()*35)+"px";
+
+    heart.style.animationDuration=(6+Math.random()*6)+"s";
+
+    heartContainer.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },12000);
+
+}
+
+setInterval(createHeart,300);
+
+// =========================================
+// MUSIC BUTTON
+// =========================================
+
+let playing=false;
+
+musicBtn.onclick=()=>{
+
+    if(!playing){
+
+        music.play();
+
+        playing=true;
+
+        musicBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
+
+    }
+
+    else{
+
+        music.pause();
+
+        playing=false;
+
+        musicBtn.innerHTML='<i class="fa-solid fa-music"></i>';
+
+    }
+
 };
 
-const c=document.getElementById("bg"),x=c.getContext("2d");
-function resize(){c.width=innerWidth;c.height=innerHeight}
-addEventListener("resize",resize);resize();
-const stars=[...Array(150)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2}));
-const hearts=[...Array(45)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:10+Math.random()*18,v:0.4+Math.random()}));
-function draw(){
-x.fillStyle="#090311";x.fillRect(0,0,c.width,c.height);
-x.fillStyle="white";
-stars.forEach(s=>{x.globalAlpha=.4+Math.random()*.6;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();});
-x.globalAlpha=1;
-x.font="20px serif";
-hearts.forEach(h=>{
-x.font=h.s+"px serif";
-x.fillText("❤️",h.x,h.y);
-h.y-=h.v;
-if(h.y<-30){h.y=c.height+20;h.x=Math.random()*c.width;}
-});
-requestAnimationFrame(draw);
+// =========================================
+// LOVE LETTER
+// =========================================
+
+const message=`Happy Girlfriend's Day ❤️
+
+Thank you for being the most beautiful chapter of my life.
+
+You are my peace.
+
+My happiness.
+
+My safe place.
+
+Every smile of yours makes my world brighter.
+
+Every hug feels like home.
+
+I never knew someone could become my favorite person until I met you.
+
+Thank you for staying beside me.
+
+Thank you for understanding me.
+
+Thank you for loving me.
+
+No matter what happens...
+
+I'll always choose you.
+
+I'll always stand beside you.
+
+Forever.
+
+❤️ Happy Girlfriend's Day, My Love ❤️`;
+
+let index=0;
+
+// =========================================
+// TYPEWRITER
+// =========================================
+
+function typeLetter(){
+
+    if(index<message.length){
+
+        typing.innerHTML+=message.charAt(index);
+
+        index++;
+
+        setTimeout(typeLetter,35);
+
+    }
+
 }
-draw();
+
+// =========================================
+// ENVELOPE OPEN
+// =========================================
+
+openBtn.addEventListener("click",()=>{
+
+    envelope.classList.add("open");
+
+    openBtn.style.display="none";
+
+    setTimeout(()=>{
+
+        typeLetter();
+
+    },900);
+
+});
+
+// =========================================
+// HERO ANIMATION
+// =========================================
+
+gsap.from(".hero h1",{
+
+    y:100,
+
+    opacity:0,
+
+    duration:1.4
+
+});
+
+gsap.from(".hero p",{
+
+    y:60,
+
+    opacity:0,
+
+    delay:.5,
+
+    duration:1
+
+});
+
+gsap.from(".hero button",{
+
+    scale:0,
+
+    opacity:0,
+
+    delay:1,
+
+    duration:1
+
+});
+
+/* ==========================================
+   PART 2
+   Premium Effects
+========================================== */
+
+// ==========================
+// Cursor Heart Trail
+// ==========================
+
+document.addEventListener("mousemove",(e)=>{
+
+    const heart=document.createElement("div");
+
+    heart.innerHTML="❤";
+
+    heart.style.position="fixed";
+
+    heart.style.left=e.clientX+"px";
+
+    heart.style.top=e.clientY+"px";
+
+    heart.style.pointerEvents="none";
+
+    heart.style.color="#ff4d94";
+
+    heart.style.fontSize=(10+Math.random()*15)+"px";
+
+    heart.style.zIndex="9999";
+
+    heart.style.transition="all 1.2s linear";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.style.opacity=0;
+
+        heart.style.transform="translateY(-60px) scale(2) rotate("
+            +(Math.random()*360)+"deg)";
+
+    },20);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },1200);
+
+});
+
+// ==========================
+// Gallery Hover Animation
+// ==========================
+
+const photos=document.querySelectorAll(".photos img");
+
+photos.forEach(photo=>{
+
+    photo.addEventListener("mouseenter",()=>{
+
+        gsap.to(photo,{
+
+            scale:1.08,
+
+            rotate:2,
+
+            duration:.4
+
+        });
+
+    });
+
+    photo.addEventListener("mouseleave",()=>{
+
+        gsap.to(photo,{
+
+            scale:1,
+
+            rotate:0,
+
+            duration:.4
+
+        });
+
+    });
+
+});
+
+// ==========================
+// Scroll Animations
+// ==========================
+
+gsap.utils.toArray("section").forEach(sec=>{
+
+    gsap.from(sec,{
+
+        opacity:0,
+
+        y:100,
+
+        duration:1,
+
+        scrollTrigger:{
+
+            trigger:sec,
+
+            start:"top 80%"
+
+        }
+
+    });
+
+});
+
+// ==========================
+// Rose Animation
+// ==========================
+
+const rose=document.querySelector(".rose");
+
+let angle=0;
+
+setInterval(()=>{
+
+    angle+=2;
+
+    rose.style.transform=
+
+    "rotate("+Math.sin(angle/20)*8+"deg) scale("+
+
+    (1+Math.sin(angle/30)*0.05)+")";
+
+},40);
+
+// ==========================
+// Sparkle Particles
+// ==========================
+
+function sparkle(){
+
+    const star=document.createElement("div");
+
+    star.innerHTML="✨";
+
+    star.style.position="fixed";
+
+    star.style.left=Math.random()*window.innerWidth+"px";
+
+    star.style.top=Math.random()*window.innerHeight+"px";
+
+    star.style.fontSize=(10+Math.random()*20)+"px";
+
+    star.style.opacity=.9;
+
+    star.style.pointerEvents="none";
+
+    star.style.transition="2s";
+
+    document.body.appendChild(star);
+
+    setTimeout(()=>{
+
+        star.style.opacity=0;
+
+        star.style.transform="translateY(-80px)";
+
+    },50);
+
+    setTimeout(()=>{
+
+        star.remove();
+
+    },2000);
+
+}
+
+setInterval(sparkle,350);
+
+// ==========================
+// Button Glow
+// ==========================
+
+const buttons=document.querySelectorAll("button");
+
+buttons.forEach(btn=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        gsap.to(btn,{
+
+            boxShadow:"0 0 45px hotpink",
+
+            duration:.3
+
+        });
+
+    });
+
+    btn.addEventListener("mouseleave",()=>{
+
+        gsap.to(btn,{
+
+            boxShadow:"0 0 0px hotpink",
+
+            duration:.3
+
+        });
+
+    });
+
+});
+
+// ==========================
+// Typing Cursor Blink
+// ==========================
+
+setInterval(()=>{
+
+    typing.innerHTML+="<span style='opacity:.5'>|</span>";
+
+    setTimeout(()=>{
+
+        typing.innerHTML=
+
+        typing.innerHTML.replace(
+
+        "<span style='opacity:.5'>|</span>","");
+
+    },450);
+
+},900);
+
+// ==========================
+// Floating Love Words
+// ==========================
+
+const words=[
+
+"Love ❤️",
+
+"Forever",
+
+"You & Me",
+
+"Always",
+
+"My Girl",
+
+"My Happiness",
+
+"Beautiful"
+
+];
+
+function floatingWord(){
+
+    const w=document.createElement("div");
+
+    w.innerText=
+
+    words[Math.floor(Math.random()*words.length)];
+
+    w.style.position="fixed";
+
+    w.style.left=Math.random()*window.innerWidth+"px";
+
+    w.style.top=(window.innerHeight+50)+"px";
+
+    w.style.color="#ffc1da";
+
+    w.style.fontSize=(16+Math.random()*10)+"px";
+
+    w.style.pointerEvents="none";
+
+    w.style.transition="8s linear";
+
+    w.style.opacity=.8;
+
+    document.body.appendChild(w);
+
+    setTimeout(()=>{
+
+        w.style.transform="translateY(-120vh)";
+
+        w.style.opacity=0;
+
+    },20);
+
+    setTimeout(()=>{
+
+        w.remove();
+
+    },8000);
+
+}
+
+setInterval(floatingWord,1800);
+
+/* ==========================================
+   PART 3
+   Final Premium Effects
+========================================== */
+
+// =========================================
+// Fireworks
+// =========================================
+
+const fireBtn = document.getElementById("fireworks");
+
+fireBtn.addEventListener("click", () => {
+
+    for (let i = 0; i < 180; i++) {
+
+        let particle = document.createElement("div");
+
+        particle.innerHTML = "✨";
+
+        particle.style.position = "fixed";
+
+        particle.style.left = "50%";
+
+        particle.style.top = "50%";
+
+        particle.style.pointerEvents = "none";
+
+        particle.style.fontSize = (12 + Math.random() * 18) + "px";
+
+        particle.style.zIndex = "99999";
+
+        particle.style.transition = "all 2s ease-out";
+
+        document.body.appendChild(particle);
+
+        let angle = Math.random() * Math.PI * 2;
+
+        let distance = 200 + Math.random() * 400;
+
+        setTimeout(() => {
+
+            particle.style.transform =
+                `translate(${Math.cos(angle) * distance}px,
+                ${Math.sin(angle) * distance}px)
+                rotate(${Math.random() * 720}deg)`;
+
+            particle.style.opacity = 0;
+
+        }, 20);
+
+        setTimeout(() => {
+
+            particle.remove();
+
+        }, 2200);
+
+    }
+
+});
+
+// =========================================
+// Heart Rain
+// =========================================
+
+function heartRain() {
+
+    const heart = document.createElement("div");
+
+    heart.innerHTML = "💖";
+
+    heart.style.position = "fixed";
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+
+    heart.style.top = "-50px";
+
+    heart.style.fontSize = (20 + Math.random() * 25) + "px";
+
+    heart.style.pointerEvents = "none";
+
+    heart.style.transition = "10s linear";
+
+    heart.style.zIndex = "999";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.style.transform =
+            `translateY(${window.innerHeight + 150}px)
+             rotate(${Math.random() * 720}deg)`;
+
+    }, 20);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 10000);
+
+}
+
+setInterval(heartRain, 450);
+
+// =========================================
+// Floating Glow Circles
+// =========================================
+
+function glowCircle() {
+
+    const circle = document.createElement("div");
+
+    circle.style.position = "fixed";
+
+    circle.style.width = (50 + Math.random() * 120) + "px";
+
+    circle.style.height = circle.style.width;
+
+    circle.style.borderRadius = "50%";
+
+    circle.style.background = "rgba(255,70,150,.12)";
+
+    circle.style.filter = "blur(25px)";
+
+    circle.style.left = Math.random() * window.innerWidth + "px";
+
+    circle.style.top = Math.random() * window.innerHeight + "px";
+
+    circle.style.pointerEvents = "none";
+
+    circle.style.transition = "5s";
+
+    document.body.appendChild(circle);
+
+    setTimeout(() => {
+
+        circle.style.opacity = "0";
+
+        circle.style.transform = "scale(2)";
+
+    }, 100);
+
+    setTimeout(() => {
+
+        circle.remove();
+
+    }, 5000);
+
+}
+
+setInterval(glowCircle, 800);
+
+// =========================================
+// Smooth Scroll Buttons
+// =========================================
+
+document.querySelectorAll("button").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        gsap.to(window, {
+
+            duration: 1,
+
+            scrollTo: window.scrollY + 600,
+
+            ease: "power2.out"
+
+        });
+
+    });
+
+});
+
+// =========================================
+// Floating Title Animation
+// =========================================
+
+gsap.to(".hero h1", {
+
+    y: -12,
+
+    repeat: -1,
+
+    yoyo: true,
+
+    duration: 2,
+
+    ease: "sine.inOut"
+
+});
+
+// =========================================
+// Letter Glow
+// =========================================
+
+gsap.to(".letter", {
+
+    boxShadow: "0 0 45px rgba(255,80,160,.5)",
+
+    repeat: -1,
+
+    yoyo: true,
+
+    duration: 2
+
+});
+
+// =========================================
+// Gallery Fade In
+// =========================================
+
+gsap.from(".photos img", {
+
+    opacity: 0,
+
+    scale: .8,
+
+    duration: 1,
+
+    stagger: .25,
+
+    scrollTrigger: {
+
+        trigger: ".gallery",
+
+        start: "top 75%"
+
+    }
+
+});
+
+// =========================================
+// Final Message Pulse
+// =========================================
+
+gsap.to(".final h1", {
+
+    scale: 1.05,
+
+    repeat: -1,
+
+    yoyo: true,
+
+    duration: 1.8
+
+});
+
+// =========================================
+// Console Message ❤️
+// =========================================
+
+console.log("%cHappy Girlfriend's Day ❤️",
+"color:#ff4d94;font-size:26px;font-weight:bold;");
+
+console.log("%cMade with ❤️ just for her.",
+"color:pink;font-size:18px;");
