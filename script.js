@@ -12,6 +12,7 @@ const musicBtn = document.getElementById("musicBtn");
 
 const openBtn = document.getElementById("open");
 
+console.log(openBtn);
 const envelope = document.querySelector(".envelope");
 
 const typing = document.getElementById("typing");
@@ -232,15 +233,17 @@ function typeLetter(){
 // ENVELOPE OPEN
 // =========================================
 
-openBtn.addEventListener("click", () => {
+console.log(openBtn);
 
-    alert("Clicked!");
+openBtn.onclick = function () {
+
+    console.log("CLICKED");
 
     envelope.classList.add("open");
 
-    alert(envelope.className);
+    console.log(envelope.className);
 
-});
+};
 
     setTimeout(()=>{
 
