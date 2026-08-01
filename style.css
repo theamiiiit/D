@@ -414,45 +414,7 @@ body{
 
 }
 
-.open-envelope-btn{
 
-    position:absolute;
-
-    left:50%;
-
-    bottom:35px;
-
-    transform:translateX(-50%);
-
-    background:white;
-
-    color:#ff4d94;
-
-    padding:14px 28px;
-
-    border-radius:40px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    z-index:20;
-
-    transition:.3s;
-
-}
-
-.open-envelope-btn:hover{
-
-    transform:translateX(-50%) scale(1.05);
-
-}
-
-.envelope.open .open-envelope-btn{
-
-    display:none;
-
-}
 /* ==========================================
    ROSE
 ========================================== */
