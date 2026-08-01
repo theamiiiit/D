@@ -723,13 +723,11 @@ document.querySelectorAll("button").forEach(btn => {
 
     btn.addEventListener("click", () => {
 
-        gsap.to(window, {
+        window.scrollBy({
 
-            duration: 1,
+            top: 600,
 
-            scrollTo: window.scrollY + 600,
-
-            ease: "power2.out"
+            behavior: "smooth"
 
         });
 
