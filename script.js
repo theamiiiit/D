@@ -20,7 +20,14 @@ const heartContainer = document.getElementById("heart-container");
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas ? canvas.getContext("2d") : null;
-if(window.gsap && window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);}
+
+// GSAP loads from an external CDN in index.html. If that request is ever
+// blocked or slow (ad-blockers, restricted networks, offline previews),
+// `gsap`/`ScrollTrigger` won't exist. These flags let every GSAP call below
+// be skipped safely instead of throwing and killing the rest of the script.
+const hasGSAP = typeof window.gsap !== "undefined";
+const hasScrollTrigger = hasGSAP && typeof window.ScrollTrigger !== "undefined";
+if(hasScrollTrigger){ gsap.registerPlugin(ScrollTrigger); }
 
 // -------------------------
 // Resize Canvas
@@ -131,11 +138,20 @@ setInterval(createHeart,1200);
 
 let playing=false;
 
+// music.mp3 isn't bundled in this project — drop your own audio file named
+// music.mp3 into the same folder. If it's missing or fails to load, hide
+// the button instead of leaving a control that silently does nothing.
+music.addEventListener("error",()=>{
+
+    musicBtn.style.display="none";
+
+});
+
 musicBtn.onclick=()=>{
 
     if(!playing){
 
-        music.play();
+        music.play().catch(()=>{});
 
         playing=true;
 
@@ -241,6 +257,8 @@ document.getElementById("letterSection").scrollIntoView({
 // HERO ANIMATION
 // =========================================
 
+if(hasGSAP){
+
 gsap.from(".hero h1",{
 
     y:100,
@@ -274,6 +292,8 @@ gsap.from(".hero button",{
     duration:1
 
 });
+
+}
 
 /* ==========================================
    PART 2
@@ -341,6 +361,8 @@ photos.forEach(photo=>{
 
     photo.addEventListener("mouseenter",()=>{
 
+        if(hasGSAP){
+
         gsap.to(photo,{
 
             scale:1.08,
@@ -351,9 +373,13 @@ photos.forEach(photo=>{
 
         });
 
+        }
+
     });
 
     photo.addEventListener("mouseleave",()=>{
+
+        if(hasGSAP){
 
         gsap.to(photo,{
 
@@ -365,6 +391,8 @@ photos.forEach(photo=>{
 
         });
 
+        }
+
     });
 
 });
@@ -372,6 +400,8 @@ photos.forEach(photo=>{
 // ==========================
 // Scroll Animations
 // ==========================
+
+if(hasScrollTrigger){
 
 gsap.utils.toArray("section").forEach(sec=>{
 
@@ -394,6 +424,8 @@ gsap.utils.toArray("section").forEach(sec=>{
     });
 
 });
+
+}
 
 // ==========================
 // Rose Animation
@@ -469,6 +501,8 @@ buttons.forEach(btn=>{
 
     btn.addEventListener("mouseenter",()=>{
 
+        if(hasGSAP){
+
         gsap.to(btn,{
 
             boxShadow:"0 0 45px hotpink",
@@ -477,9 +511,13 @@ buttons.forEach(btn=>{
 
         });
 
+        }
+
     });
 
     btn.addEventListener("mouseleave",()=>{
+
+        if(hasGSAP){
 
         gsap.to(btn,{
 
@@ -488,6 +526,8 @@ buttons.forEach(btn=>{
             duration:.3
 
         });
+
+        }
 
     });
 
@@ -727,6 +767,8 @@ setInterval(glowCircle, 2500);
 // Floating Title Animation
 // =========================================
 
+if(hasGSAP){
+
 gsap.to(".hero h1", {
 
     y: -12,
@@ -741,9 +783,13 @@ gsap.to(".hero h1", {
 
 });
 
+}
+
 // =========================================
 // Letter Glow
 // =========================================
+
+if(hasGSAP){
 
 gsap.to(".letter", {
 
@@ -757,9 +803,13 @@ gsap.to(".letter", {
 
 });
 
+}
+
 // =========================================
 // Gallery Fade In
 // =========================================
+
+if(hasScrollTrigger){
 
 gsap.from(".photos img", {
 
@@ -781,9 +831,13 @@ gsap.from(".photos img", {
 
 });
 
+}
+
 // =========================================
 // Final Message Pulse
 // =========================================
+
+if(hasGSAP){
 
 gsap.to(".final h1", {
 
@@ -796,6 +850,8 @@ gsap.to(".final h1", {
     duration: 1.8
 
 });
+
+}
 
 // =========================================
 // Console Message ❤️

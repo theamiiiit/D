@@ -200,6 +200,7 @@ body{
     #ff4d94);
 
     -webkit-background-clip:text;
+    background-clip:text;
 
     color:transparent;
 
@@ -477,6 +478,7 @@ body{
     background:linear-gradient(90deg,#ffb6d9,#fff);
 
     -webkit-background-clip:text;
+    background-clip:text;
 
     color:transparent;
 
@@ -555,6 +557,7 @@ body{
     background:linear-gradient(90deg,#ff9ecf,#fff,#ff4d94);
 
     -webkit-background-clip:text;
+    background-clip:text;
 
     color:transparent;
 
