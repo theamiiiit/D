@@ -233,8 +233,13 @@ function typeLetter(){
 // =========================================
 
 openBtn.addEventListener("click", () => {
-    alert("Button clicked!");
+
+    alert("Clicked!");
+
     envelope.classList.add("open");
+
+    alert(envelope.className);
+
 });
 
     setTimeout(()=>{
