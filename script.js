@@ -20,7 +20,7 @@ const heartContainer = document.getElementById("heart-container");
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas ? canvas.getContext("2d") : null;
-gsap.registerPlugin(ScrollTrigger);
+if(window.gsap && window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);}
 
 // -------------------------
 // Resize Canvas
@@ -67,6 +67,7 @@ for(let i=0;i<220;i++){
 // =========================================
 
 function drawStars(){
+    if(!ctx) return;
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -122,7 +123,7 @@ function createHeart(){
 
 }
 
-setInterval(createHeart,300);
+setInterval(createHeart,1200);
 
 // =========================================
 // MUSIC BUTTON
@@ -456,7 +457,7 @@ function sparkle(){
 
 }
 
-setInterval(sparkle,350);
+setInterval(sparkle,1500);
 
 // ==========================
 // Button Glow
@@ -568,7 +569,7 @@ function floatingWord(){
 
 }
 
-setInterval(floatingWord,1800);
+setInterval(floatingWord,4000);
 
 /* ==========================================
    PART 3
@@ -672,7 +673,7 @@ function heartRain() {
 
 }
 
-setInterval(heartRain, 450);
+setInterval(heartRain, 1800);
 
 // =========================================
 // Floating Glow Circles
@@ -720,27 +721,7 @@ function glowCircle() {
 
 }
 
-setInterval(glowCircle, 800);
-
-// =========================================
-// Smooth Scroll Buttons
-// =========================================
-
-document.querySelectorAll("button").forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        window.scrollBy({
-
-            top: 600,
-
-            behavior: "smooth"
-
-        });
-
-    });
-
-});
+setInterval(glowCircle, 2500);
 
 // =========================================
 // Floating Title Animation
