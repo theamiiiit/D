@@ -284,7 +284,13 @@ gsap.from(".hero button",{
 // Cursor Heart Trail
 // ==========================
 
+let lastHeart = 0;
+
 document.addEventListener("mousemove",(e)=>{
+
+    if(Date.now()-lastHeart<40) return;
+
+    lastHeart=Date.now();
 
     const heart=document.createElement("div");
 
@@ -491,21 +497,13 @@ buttons.forEach(btn=>{
 // Typing Cursor Blink
 // ==========================
 
-setInterval(()=>{
+let cursor = true;
 
-    typing.innerHTML+="<span style='opacity:.5'>|</span>";
-
-    setTimeout(()=>{
-
-        typing.innerHTML=
-
-        typing.innerHTML.replace(
-
-        "<span style='opacity:.5'>|</span>","");
-
-    },450);
-
-},900);
+setInterval(() => {
+    document.getElementById("typing").style.borderRight =
+        cursor ? "2px solid white" : "none";
+    cursor = !cursor;
+}, 500);
 
 // ==========================
 // Floating Love Words
