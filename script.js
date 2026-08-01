@@ -232,15 +232,10 @@ function typeLetter(){
 // ENVELOPE OPEN
 // =========================================
 
-openBtn.addEventListener("click",()=>{
-
-    openBtn.disabled = true;
-
-    openBtn.innerHTML = "Opening... ❤️";
-
-    document.getElementById("letterSection").scrollIntoView({
-        behavior:"smooth"
-    });
+openBtn.addEventListener("click", () => {
+    alert("Button clicked!");
+    envelope.classList.add("open");
+});
 
     setTimeout(()=>{
 
