@@ -219,7 +219,15 @@ openBtn.addEventListener("click",()=>{
 
     envelope.classList.add("open");
 
-    openBtn.style.display="none";
+openBtn.disabled = true;
+
+openBtn.innerHTML = "Opened ❤️";
+
+document.getElementById("letterSection").scrollIntoView({
+
+    behavior:"smooth"
+
+});
 
     setTimeout(()=>{
 
