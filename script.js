@@ -261,11 +261,13 @@ if(hasGSAP){
 
 gsap.from(".hero h1",{
 
-    y:100,
-
     opacity:0,
 
-    duration:1.4
+    y:80,
+
+    duration:1,
+
+    clearProps:"all"
 
 });
 
@@ -403,27 +405,27 @@ photos.forEach(photo=>{
 
 if(hasScrollTrigger){
 
-gsap.utils.toArray("section").forEach(sec=>{
+// gsap.utils.toArray("section").forEach(sec=>{
 
-    gsap.from(sec,{
+//     gsap.from(sec,{
 
-        opacity:0,
+//         opacity:0,
 
-        y:100,
+//         y:100,
 
-        duration:1,
+//         duration:1,
 
-        scrollTrigger:{
+//         scrollTrigger:{
 
-            trigger:sec,
+//             trigger:sec,
 
-            start:"top 80%"
+//             start:"top 80%"
 
-        }
+//         }
 
-    });
+//     });
 
-});
+// });
 
 }
 
@@ -811,25 +813,29 @@ gsap.to(".letter", {
 
 if(hasScrollTrigger){
 
-// gsap.from(".photos img", {
+gsap.from(".photos img", {
 
-//     opacity: 0,
+    opacity: 0,
 
-//     scale: .8,
+    scale: 0.8,
 
-//     duration: 1,
+    duration: 1,
 
-//     stagger: .25,
+    stagger: 0.25,
 
-//     scrollTrigger: {
+    immediateRender: false,
 
-//         trigger: ".gallery",
+    scrollTrigger: {
 
-//         start: "top 75%"
+        trigger: ".gallery",
 
-//     }
+        start: "top 80%",
 
-// });
+        once: true
+
+    }
+
+});
 
 }
 
