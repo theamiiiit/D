@@ -232,15 +232,17 @@ function typeLetter(){
 // ENVELOPE OPEN
 // =========================================
 
-openBtn.addEventListener("click", () => {
+console.log(openBtn);
 
-    alert("Clicked!");
+openBtn.onclick = function () {
+
+    console.log("CLICKED");
 
     envelope.classList.add("open");
 
-    alert(envelope.className);
+    console.log(envelope.className);
 
-});
+};
 
     setTimeout(()=>{
 
