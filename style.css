@@ -50,6 +50,14 @@ body{
     #20072c);
 
 }
+.hero,
+.gallery,
+.final,
+#letterSection,
+.rose-section{
+    position:relative;
+    z-index:2;
+}
 
 /* ==========================================
  HEART CONTAINER
