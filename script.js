@@ -19,8 +19,7 @@ const typing = document.getElementById("typing");
 const heartContainer = document.getElementById("heart-container");
 
 const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
+const ctx = canvas ? canvas.getContext("2d") : null;
 gsap.registerPlugin(ScrollTrigger);
 
 // -------------------------
