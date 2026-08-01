@@ -245,6 +245,8 @@ openBtn.addEventListener("click",()=>{
 
         envelope.classList.add("open");
 
+       console.log(envelope.className);
+
     },400);
 
     setTimeout(()=>{
