@@ -254,22 +254,8 @@ body{
 }
 
 /* ==========================================
-   ENVELOPE SECTION
+   ENVELOPE
 ========================================== */
-
-#letterSection{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:100px 20px;
-
-}
 
 .envelope{
 
@@ -281,21 +267,103 @@ body{
 
     height:450px;
 
+    margin:auto;
+
     perspective:1200px;
 
 }
 
-.cover{
+/* Back */
+
+.envelope-back{
 
     position:absolute;
+
+    inset:0;
+
+    border-radius:20px;
+
+    background:linear-gradient(145deg,#ff5ea6,#ff8fc5);
+
+    box-shadow:
+        0 20px 60px rgba(255,20,120,.35);
+
+}
+
+/* Letter */
+
+.letter{
+
+    position:absolute;
+
+    left:30px;
+
+    right:30px;
+
+    bottom:20px;
+
+    height:380px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    overflow:auto;
+
+    color:#444;
+
+    transform:translateY(180px);
+
+    transition:1s;
+
+    z-index:2;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
+
+}
+
+.letter h2{
+
+    color:#ff4d94;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+#typing{
+
+    color:#444;
+
+    line-height:1.9;
+
+    font-size:18px;
+
+    white-space:pre-line;
+
+}
+
+/* Flap */
+
+.flap{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
 
     width:100%;
 
     height:100%;
 
-    background:linear-gradient(135deg,#ff4d94,#ff7eb3);
+    background:linear-gradient(145deg,#ff4d94,#ff80bf);
 
-    clip-path:polygon(0 0,100% 0,50% 55%);
+    clip-path:polygon(0 0,100% 0,50% 60%);
 
     transform-origin:top;
 
@@ -303,66 +371,23 @@ body{
 
     z-index:5;
 
-    border-radius:18px;
-
-}
-
-.letter{
-
-    position:absolute;
-
-    width:100%;
-
-    height:100%;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.15);
-
     border-radius:20px;
 
-    padding:50px;
+}
 
-    overflow:hidden;
+/* Open */
 
-    box-shadow:
+.envelope.open .flap{
 
-        0 20px 60px rgba(0,0,0,.35);
+    transform:rotateX(-180deg);
 
 }
 
-.envelope.open .cover{
+.envelope.open .letter{
 
-    transform:rotateX(180deg);
-
-}
-
-.letter h2{
-
-    text-align:center;
-
-    margin-bottom:30px;
-
-    font-size:42px;
-
-    color:#ffb7d7;
+    transform:translateY(-40px);
 
 }
-
-#typing{
-
-    white-space:pre-line;
-
-    font-size:22px;
-
-    line-height:2;
-
-    color:#f2f2f2;
-
-}
-
 /* ==========================================
    ROSE
 ========================================== */
