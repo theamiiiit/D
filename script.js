@@ -12,7 +12,9 @@ const musicBtn = document.getElementById("musicBtn");
 
 const openBtn = document.getElementById("open");
 
-console.log(openBtn);
+openBtn.onclick = function () {
+    alert("I am working!");
+};
 const envelope = document.querySelector(".envelope");
 
 const typing = document.getElementById("typing");
