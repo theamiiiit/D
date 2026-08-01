@@ -233,26 +233,29 @@ function typeLetter(){
 
 openBtn.addEventListener("click",()=>{
 
-    envelope.classList.add("open");
+    openBtn.disabled = true;
 
-openBtn.disabled = true;
+    openBtn.innerHTML = "Opening... ❤️";
 
-openBtn.innerHTML = "Opened ❤️";
-
-document.getElementById("letterSection").scrollIntoView({
-
-    behavior:"smooth"
-
-});
+    document.getElementById("letterSection").scrollIntoView({
+        behavior:"smooth"
+    });
 
     setTimeout(()=>{
 
+        envelope.classList.add("open");
+
+    },400);
+
+    setTimeout(()=>{
+
+        openBtn.innerHTML = "Opened ❤️";
+
         typeLetter();
 
-    },900);
+    },2100);
 
 });
-
 // =========================================
 // HERO ANIMATION
 // =========================================
