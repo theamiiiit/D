@@ -11,7 +11,7 @@ const music = document.getElementById("music");
 const musicBtn = document.getElementById("musicBtn");
 
 const openBtn = document.getElementById("open");
-
+console.log("1");
 openBtn.onclick = function () {
     alert("I am working!");
 };
@@ -235,33 +235,36 @@ function typeLetter(){
 // ENVELOPE OPEN
 // =========================================
 
-console.log(openBtn);
+openBtn.addEventListener("click", () => {
 
-openBtn.onclick = function () {
+    // Prevent double click
+    openBtn.disabled = true;
 
-    console.log("CLICKED");
+    openBtn.innerHTML = "Opening... ❤️";
 
-    envelope.classList.add("open");
+    // Scroll to the letter
+    document.getElementById("letterSection").scrollIntoView({
+        behavior: "smooth"
+    });
 
-    console.log(envelope.className);
-
-};
-
-    setTimeout(()=>{
+    // Open envelope
+    setTimeout(() => {
 
         envelope.classList.add("open");
 
-       console.log(envelope.className);
+    }, 600);
 
-    },400);
-
-    setTimeout(()=>{
+    // Start typing after animation
+    setTimeout(() => {
 
         openBtn.innerHTML = "Opened ❤️";
 
+        typing.innerHTML = "";
+        index = 0;
+
         typeLetter();
 
-    },2100);
+    }, 2200);
 
 });
 // =========================================
