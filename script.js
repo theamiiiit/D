@@ -21,19 +21,6 @@ const heartContainer = document.getElementById("heart-container");
 const canvas = document.getElementById("canvas");
 const ctx = canvas ? canvas.getContext("2d") : null;
 
-const envelopeBtn = document.querySelector(".open-envelope-btn");
-
-envelopeBtn.addEventListener("click", () => {
-
-    envelope.classList.add("open");
-
-    setTimeout(() => {
-
-        typeLetter();
-
-    }, 1600);
-
-});
 
 // GSAP loads from an external CDN in index.html. If that request is ever
 // blocked or slow (ad-blockers, restricted networks, offline previews),
