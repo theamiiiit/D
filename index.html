@@ -1,22 +1,166 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>❤️ Happy Girlfriend's Day ❤️</title>
-<link rel="stylesheet" href="style.css">
-</head><body>
-<canvas id="bg"></canvas>
-<div id="overlay">
-<div class="glass">
-<h1>❤️ Happy Girlfriend's Day ❤️</h1>
-<p class="subtitle">A little surprise made just for you.</p>
-<button id="openBtn">Open My Heart ❤️</button>
-<div id="letter" class="hidden">
-<div class="envelope">💌</div>
-<h2>To My Love ❤️</h2>
-<p id="msg"></p>
-<div class="rose">🌹</div>
-<p class="end">Forever Yours ❤️</p>
-</div>
-</div>
-</div>
-<script src="script.js"></script>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>❤️ Happy Girlfriend's Day ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Floating Hearts -->
+
+    <div id="heart-container"></div>
+
+    <!-- Background -->
+
+    <canvas id="canvas"></canvas>
+
+    <!-- Music -->
+
+    <audio id="music" loop>
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="musicBtn">
+
+        <i class="fa-solid fa-music"></i>
+
+    </button>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h1>
+
+            Happy Girlfriend's Day ❤️
+
+        </h1>
+
+        <p>
+
+            A little surprise made only for you...
+
+        </p>
+
+        <button id="open">
+
+            Open My Heart ❤️
+
+        </button>
+
+    </section>
+
+    <!-- Envelope -->
+
+    <section id="letterSection">
+
+        <div class="envelope">
+
+            <div class="cover"></div>
+
+            <div class="letter">
+
+                <h2>
+
+                    To My Love ❤️
+
+                </h2>
+
+                <p id="typing"></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Rose -->
+
+    <section class="rose-section">
+
+        <div class="rose">
+
+            🌹
+
+        </div>
+
+    </section>
+
+    <!-- Memories -->
+
+    <section class="gallery">
+
+        <h2>
+
+            Our Beautiful Memories ❤️
+
+        </h2>
+
+        <div class="photos">
+
+            <img src="https://picsum.photos/400/500?1">
+
+            <img src="https://picsum.photos/400/500?2">
+
+            <img src="https://picsum.photos/400/500?3">
+
+            <img src="https://picsum.photos/400/500?4">
+
+        </div>
+
+    </section>
+
+    <!-- Final -->
+
+    <section class="final">
+
+        <h1>
+
+            ❤️ Happy Girlfriend's Day ❤️
+
+        </h1>
+
+        <p>
+
+            No matter where life takes us,
+
+            I'll always choose you.
+
+        </p>
+
+        <button id="fireworks">
+
+            Click Me ❤️
+
+        </button>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
