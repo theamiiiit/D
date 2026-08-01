@@ -811,25 +811,25 @@ gsap.to(".letter", {
 
 if(hasScrollTrigger){
 
-gsap.from(".photos img", {
+// gsap.from(".photos img", {
 
-    opacity: 0,
+//     opacity: 0,
 
-    scale: .8,
+//     scale: .8,
 
-    duration: 1,
+//     duration: 1,
 
-    stagger: .25,
+//     stagger: .25,
 
-    scrollTrigger: {
+//     scrollTrigger: {
 
-        trigger: ".gallery",
+//         trigger: ".gallery",
 
-        start: "top 75%"
+//         start: "top 75%"
 
-    }
+//     }
 
-});
+// });
 
 }
 
